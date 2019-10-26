@@ -3,10 +3,15 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import SignInPage from './pages/SignInPage';
 import MainPage from './pages/MainPage';
+import GetLocation from 'react-native-get-location'
+
+
 
 export default function App() {
   return (
+  
     <MainPage />
+    
   );
 }
 

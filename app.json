@@ -24,7 +24,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "This app needs to get your location..."
+        
+      }
     }
+  },
+  "LocationConfig": {
+    "enableHighAccuracy": false
   }
+  
 }
+

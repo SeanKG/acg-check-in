@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet } from 'react-native';
+import GetLocation from 'react-native-get-location';
 import {
     Container,
     Header,
@@ -13,12 +14,29 @@ import {
     Text
 } from "native-base";
 
+
+
 class ImHereButton extends Component {
+
+    getLocation = () => {}
+
     render() {
         return (
             <Container style={styles.container}>
                 <Content padder style={{ backgroundColor: "#FFF", padding: 20 }}>
-                    <Button block success style={styles.mb15}>
+                    <Button block success style={styles.mb15} onPress={
+                        () => {GetLocation.getCurrentPosition({
+                            enableHighAccuracy: true,
+                            timeout: 2000,
+                        })
+                        .then(location => {
+                            alert(location);
+                        })
+                        .catch(error => {
+                            const { code, message } = error;
+                            alert(message +"erorororrororo");
+                        })}
+                    }>
                         <Text>Im Here</Text>
                     </Button>
                     <Button block danger style={styles.mb15}>
