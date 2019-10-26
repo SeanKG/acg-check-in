@@ -1,11 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import SignInPage from './pages/SignInPage';
+import MainPage from './pages/MainPage';
+
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>HEYOOOOO</Text>
-    </View>
+    <MainPage />
   );
 }
 
