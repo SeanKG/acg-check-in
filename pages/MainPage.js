@@ -6,6 +6,7 @@ import {
 } from "native-base";
 
 import Header2 from './MainPageComponents/Header';
+import Greeting from './MainPageComponents/Greeting';
 import ImHereButton from './MainPageComponents/ImHereButton';
 
 
@@ -13,7 +14,7 @@ class MainPage extends Component {
     render() {
         return (
             <Container>
-                <Header2 />
+                <Greeting/>
                 <ImHereButton />
             </Container>
         );
