@@ -18,24 +18,21 @@ import {
 
 class ImHereButton extends Component {
 
-    getLocation = () => {}
-
     render() {
         return (
             <Container style={styles.container}>
                 <Content padder style={{ backgroundColor: "#FFF", padding: 20 }}>
                     <Button block success style={styles.mb15} onPress={
-                        () => {GetLocation.getCurrentPosition({
-                            enableHighAccuracy: true,
-                            timeout: 2000,
-                        })
-                        .then(location => {
-                            alert(location);
-                        })
-                        .catch(error => {
-                            const { code, message } = error;
-                            alert(message +"erorororrororo");
-                        })}
+                        () => {
+                            navigator.geolocation.getCurrentPosition(position => {
+                                if (position) {
+                                    alert("latitude : " + position.coords.latitude + "\n longitude :" + position.coords.longitude)
+                                }
+                            }, err => {
+                                console.log(err)
+                                alert('fetching the position failed')
+                            }, { enableHighAccuracy: false, timeout: 20000, maximumAge: 0 })
+                        }
                     }>
                         <Text>Im Here</Text>
                     </Button>
@@ -43,7 +40,7 @@ class ImHereButton extends Component {
                         <Text>Sorry I can't show up</Text>
                     </Button>
                 </Content>
-            </Container>
+            </Container >
         );
     }
 }
