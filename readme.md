@@ -3,6 +3,7 @@
 created using: 
 
 https://facebook.github.io/react-native/docs/getting-started
+
 https://expo.io/learn
 
 ### To start:
