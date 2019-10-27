@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { StyleSheet, AsyncStorage } from 'react-native'
+import { StyleSheet, AsyncStorage, KeyboardAvoidingView } from 'react-native'
 import { SocialIcon } from 'react-native-elements'
 import {
     Container,
@@ -83,50 +83,52 @@ class SignInPage extends Component {
     render() {
         const { username, password } = this.state
         return (
-            <Container style={styles.mainContainer}>
-                <Container style={styles.containerCentered}>
-                    <LogoIcon name="LogoNoText" height="120" width="120" />
-                </Container>
-                <Form>
-                    <Item floatingLabel>
-                        <Label style={styles.placeholder}>Enter Username</Label>
-                        <Input
-                            onChangeText={username => this.setState({ username })}
-                            value={this.state.username}
-                        />
-                    </Item>
-                    <Item floatingLabel>
-                        <Label style={styles.placeholder}>Enter Password</Label>
-                        <Input
-                            onChangeText={password => this.setState({ password })}
-                            value={this.state.password}
-                            name='password'
-                            secureTextEntry
-                        />
-                    </Item>
-                </Form>
-                {this.state.spinner &&
-                    <Text>Processing ...</Text>
-                }
-                {!this.state.spinner &&
-                    <Container>
-                        <Button rounded style={styles.signInButtons} onPress={this._signInHandler}>
-                            <Text>Log In</Text>
-                        </Button>
-                    </ Container>
-                }
-                <Container style={styles.containerCentered}>
-                    <SocialIcon
-                        type='twitter'
-                    />
-                    <SocialIcon
-                        type='facebook'
-                    />
-                </ Container>
-                <Container style={styles.containerCentered}>
-                    <Text style={styles.signUpButtons} onPress={this._signInHandler}>Sign up</Text>
-                </ Container>
-            </Container >
+            <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding" enabled>
+                <Content>
+                    <Container style={styles.mainContainer}>
+                        <Container style={styles.containerCentered}>
+                            <LogoIcon name="LogoNoText" height="120" width="120" />
+                        </Container>
+                        <Form>
+                            <Item floatingLabel>
+                                <Label style={styles.placeholder}>Enter Username</Label>
+                                <Input
+                                    onChangeText={username => this.setState({ username })}
+                                    value={this.state.username}
+                                />
+                            </Item>
+                            <Item floatingLabel>
+                                <Label style={styles.placeholder}>Enter Password</Label>
+                                <Input
+                                    onChangeText={password => this.setState({ password })}
+                                    value={this.state.password}
+                                    name='password'
+                                    secureTextEntry
+                                />
+                            </Item>
+                        </Form>
+                        {this.state.spinner &&
+                            <Text>Processing ...</Text>
+                        }
+                        {!this.state.spinner &&
+                            <Container>
+                                <Button rounded style={styles.signInButtons} onPress={this._signInHandler}>
+                                    <Text>Log In</Text>
+                                </Button>
+                            </ Container>
+                        }
+                        <Container style={styles.containerCentered}>
+                            <SocialIcon
+                                type='twitter'
+                            />
+                            <SocialIcon
+                                type='facebook'
+                            />
+                        </ Container>
+                        <Text style={styles.signUpButtons} onPress={this._signInHandler}>Sign up</Text>
+                    </Container >
+                </Content>
+            </KeyboardAvoidingView>
         );
     }
 }
@@ -136,7 +138,6 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFF",
         alignItems: "center",
         justifyContent: "center",
-        flex: 1,
         flexDirection: "row"
     },
     mainContainer: {
@@ -154,6 +155,8 @@ const styles = StyleSheet.create({
     signUpButtons: {
         color: "black",
         opacity: 0.5,
+        flex: 1,
+        marginBottom: 60,
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",

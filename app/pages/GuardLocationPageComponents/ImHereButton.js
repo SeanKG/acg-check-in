@@ -34,6 +34,8 @@ class ImHereButton extends Component {
         navigator.geolocation.getCurrentPosition(position => {
             if (position && position.coords) {
                 this.setState({
+                    username: this.props.username,
+                    usertoken: this.props.usertoken,
                     latitude: position.coords.latitude,
                     longitude: position.coords.longitude
                 });
@@ -77,7 +79,11 @@ class ImHereButton extends Component {
             await Alert.alert('Error', response);
         }
         else {
-            alert("posting success")
+            alert("Position confirmed:" +
+                "\n Longitude : " + formData.longitude +
+                "\n Latitude : " + formData.latitude +
+                "\n Username : " + formData.username
+            )
         }
     }
 
