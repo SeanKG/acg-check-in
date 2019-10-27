@@ -1,11 +1,11 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import SignInPage from './pages/SignInPage';
-import MainPage from './pages/MainPage';
+import GuardLocationPage from './pages/GuardLocationPage';
 
 
 const AppNavigatorStack = createStackNavigator({
-    MainPage: { screen: MainPage },
+    GuardLocationPage: { screen: GuardLocationPage },
     SignInPage: { screen: SignInPage }
 }, {
         initialRouteName: 'SignInPage'

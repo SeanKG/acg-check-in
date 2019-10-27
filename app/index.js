@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import AppNavigator from './router';
 import SignInPage from './pages/SignInPage';
-import MainPage from './pages/MainPage';
+import GuardLocationPage from './pages/GuardLocationPage';
 
 export default class App extends React.Component {
     render() {

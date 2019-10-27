@@ -19,6 +19,7 @@ import {
 class ImHereButton extends Component {
 
     render() {
+        const { username, password } = this.props
         return (
             <Container style={styles.container}>
                 <Content padder style={{ backgroundColor: "#FFF", padding: 20 }}>
@@ -26,7 +27,7 @@ class ImHereButton extends Component {
                         () => {
                             navigator.geolocation.getCurrentPosition(position => {
                                 if (position) {
-                                    alert("latitude : " + position.coords.latitude + "\n longitude :" + position.coords.longitude)
+                                    alert("latitude : " + position.coords.latitude + "\n longitude :" + position.coords.longitude + "\n username: " + username + "\n password:" + password)
                                 }
                             }, err => {
                                 console.log(err)
