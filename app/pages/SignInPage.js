@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { StyleSheet, AsyncStorage } from 'react-native'
+import { SocialIcon } from 'react-native-elements'
 import {
     Container,
     Header,
     Title,
     Content,
+    Label,
     Button,
     Item,
     Input,
@@ -35,6 +37,11 @@ class SignInPage extends Component {
 
     _signInHandler = async () => {
         const { username, password } = this.state;
+
+        if (!username || !password) {
+            alert("Please put username and password")
+            return
+        }
 
         const formData = {
             username: username,
@@ -76,48 +83,86 @@ class SignInPage extends Component {
     render() {
         const { username, password } = this.state
         return (
-            <Container style={styles.container}>
-                <Content>
-                    <LogoIcon name="Simplified" height="100" width="100" />
-                    <Form>
-                        <Item>
-                            <Input
-                                onChangeText={username => this.setState({ username })}
-                                placeholder="username"
-                                value={this.state.username}
-                            />
-                        </Item>
-                        <Item last>
-                            <Input
-                                onChangeText={password => this.setState({ password })}
-                                value={this.state.password}
-                                name='password'
-                                placeholder='Enter password'
-                                secureTextEntry
-                            />
-                        </Item>
-                    </Form>
-                    {this.state.spinner &&
-                        <Text>Processing ...</Text>
-                    }
-                    {!this.state.spinner &&
-                        <Button block style={{ margin: 15, marginTop: 50 }} onPress={this._signInHandler}>
-                            <Text>Sign In</Text>
+            <Container style={styles.mainContainer}>
+                <Container style={styles.containerCentered}>
+                    <LogoIcon name="LogoNoText" height="120" width="120" />
+                </Container>
+                <Form>
+                    <Item floatingLabel>
+                        <Label style={styles.placeholder}>Enter Username</Label>
+                        <Input
+                            onChangeText={username => this.setState({ username })}
+                            value={this.state.username}
+                        />
+                    </Item>
+                    <Item floatingLabel>
+                        <Label style={styles.placeholder}>Enter Password</Label>
+                        <Input
+                            onChangeText={password => this.setState({ password })}
+                            value={this.state.password}
+                            name='password'
+                            secureTextEntry
+                        />
+                    </Item>
+                </Form>
+                {this.state.spinner &&
+                    <Text>Processing ...</Text>
+                }
+                {!this.state.spinner &&
+                    <Container>
+                        <Button rounded style={styles.signInButtons} onPress={this._signInHandler}>
+                            <Text>Log In</Text>
                         </Button>
-                    }
-                </Content>
+                    </ Container>
+                }
+                <Container style={styles.containerCentered}>
+                    <SocialIcon
+                        type='twitter'
+                    />
+                    <SocialIcon
+                        type='facebook'
+                    />
+                </ Container>
+                <Container style={styles.containerCentered}>
+                    <Text style={styles.signUpButtons} onPress={this._signInHandler}>Sign up</Text>
+                </ Container>
             </Container >
         );
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: "#FFF"
-    },
-    icon: {
+    containerCentered: {
+        backgroundColor: "#FFF",
+        alignItems: "center",
         justifyContent: "center",
-        alignItems: "center"
+        flex: 1,
+        flexDirection: "row"
+    },
+    mainContainer: {
+        backgroundColor: "#FFF",
+        margin: 20,
+        marginRight: 35
+    },
+    signInButtons: {
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#2c2a29",
+        margin: 15,
+        marginTop: 60,
+    },
+    signUpButtons: {
+        color: "black",
+        opacity: 0.5,
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        textDecorationLine: "underline"
+    },
+    placeholder: {
+        opacity: 0.6
+    },
+    form: {
     }
 });
 
