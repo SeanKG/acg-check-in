@@ -17,6 +17,8 @@ import {
     Text
 } from "native-base";
 
+import LogoIcon from './Icon';
+
 class SignInPage extends Component {
 
     constructor(props) {
@@ -76,6 +78,7 @@ class SignInPage extends Component {
         return (
             <Container style={styles.container}>
                 <Content>
+                    <LogoIcon name="Simplified" height="100" width="100" />
                     <Form>
                         <Item>
                             <Input
@@ -111,6 +114,10 @@ class SignInPage extends Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "#FFF"
+    },
+    icon: {
+        justifyContent: "center",
+        alignItems: "center"
     }
 });
 
