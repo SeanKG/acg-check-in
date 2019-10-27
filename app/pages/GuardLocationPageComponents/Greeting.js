@@ -4,8 +4,8 @@ import { Text, View, StyleSheet } from 'react-native';
 class Heading extends Component {
   render() {
     return (
-      <View style={{ alignItems: 'center', marginTop: '25%', marginBottom: '5%'}}>
-        <Text style={{fontWeight: 'bold', fontSize: '30'}} >Good {this.props.shift} {this.props.name}!</Text>
+      <View style={{ alignItems: 'center', marginTop: '25%', marginBottom: '5%' }}>
+        <Text style={{ fontSize: 20 }} >Good {this.props.shift} {this.props.name}!</Text>
       </View>
     );
   }
@@ -32,7 +32,7 @@ class CallCoordinator extends Component {
 }
 
 const styles = StyleSheet.create({
-  
+
   container: {
     backgroundColor: "#FFF"
   },
@@ -47,7 +47,7 @@ export default class Greeting extends Component {
       <View>
         <Heading name='John' shift='Morning' />
         <GuardDetails location='Young & Preston' />
-        
+
       </View>
     );
   }

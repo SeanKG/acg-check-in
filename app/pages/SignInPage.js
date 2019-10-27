@@ -74,7 +74,7 @@ class SignInPage extends Component {
         else {
             console.log(response)
             await AsyncStorage.setItem('usertoken', "hitoken");
-            await AsyncStorage.setItem('username', "lololo");
+            await AsyncStorage.setItem('username', "JohnOSC");
             this.props.navigation.navigate('GuardLocationPage');
         }
     }
