@@ -1,25 +1,2 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
-import SignInPage from './pages/SignInPage';
-import MainPage from './pages/MainPage';
-import GetLocation from 'react-native-get-location'
-
-
-
-export default function App() {
-  return (
-  
-    <MainPage />
-    
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+import App from "./app/index";
+export default App;

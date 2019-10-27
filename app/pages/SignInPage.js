@@ -41,7 +41,9 @@ class SignInPage extends Component {
                             <Input placeholder="Password" secureTextEntry />
                         </Item>
                     </Form>
-                    <Button block style={{ margin: 15, marginTop: 50 }}>
+                    <Button block style={{ margin: 15, marginTop: 50 }} onPress={() => {
+                        this.props.navigation.navigate("MainPage");
+                    }}>
                         <Text>Sign In</Text>
                     </Button>
                     <Button block style={{ margin: 15, marginTop: 50, backgroundColor: 'red' }}>
