@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { StyleSheet } from 'react-native'
+import axios from "axios";
+import { StyleSheet, AsyncStorage } from 'react-native'
 import {
     Container,
     Header,
@@ -18,32 +19,57 @@ import {
 
 class SignInPage extends Component {
 
-    state = {
-        username: '',
-        password: ''
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            email: '',
+            password: '',
+            spinner: false
+        };
+
+        this._signInHandler = this._signInHandler.bind(this);
     }
 
-    handleusernameChange = username => {
-        this.setState({ username })
-    }
+    _signInHandler = async () => {
+        const { username, password } = this.state;
 
-    handlePasswordChange = password => {
-        this.setState({ password })
-    }
+        const formData = {
+            username: username,
+            password: password
+        }
 
-    onLogin = async () => {
-        const { username, password } = this.state
-        try {
-            if (username.length > 0 && password.length > 0) {
-                this.props.navigation.navigate('GuardLocationPage', {
-                    username: username,
-                    password: password
-                })
-            }
-        } catch (error) {
-            alert(error)
+        this.setState({ spinner: true });
+
+        const response = await axios({
+            method: 'post',
+            url: `https://reqres.in/api/users`,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: formData
+        })
+            .then(response => {
+                this.setState({ spinner: false });
+                return response;
+            })
+            .catch(error => {
+                this.setState({ spinner: false });
+                throw error;
+            });
+
+        if (typeof response.message != "undefined") {
+            await Alert.alert('Error', response);
+        }
+        else {
+            console.log(response)
+            await AsyncStorage.setItem('usertoken', "hitoken");
+            await AsyncStorage.setItem('username', "lololo");
+            this.props.navigation.navigate('GuardLocationPage');
         }
     }
+
 
     render() {
         const { username, password } = this.state
@@ -53,31 +79,29 @@ class SignInPage extends Component {
                     <Form>
                         <Item>
                             <Input
+                                onChangeText={username => this.setState({ username })}
                                 placeholder="username"
-                                name='username'
-                                value={username}
-                                placeholder='Enter username'
-                                autoCapitalize='none'
-                                onChangeText={this.handleusernameChange}
+                                value={this.state.username}
                             />
                         </Item>
                         <Item last>
                             <Input
-                                secureTextEntry
+                                onChangeText={password => this.setState({ password })}
+                                value={this.state.password}
                                 name='password'
-                                value={password}
                                 placeholder='Enter password'
                                 secureTextEntry
-                                onChangeText={this.handlePasswordChange}
                             />
                         </Item>
                     </Form>
-                    <Button block style={{ margin: 15, marginTop: 50 }} onPress={this.onLogin}>
-                        <Text>Sign In</Text>
-                    </Button>
-                    <Button block style={{ margin: 15, marginTop: 50, backgroundColor: 'red' }}>
-                        <Text>Sign up</Text>
-                    </Button>
+                    {this.state.spinner &&
+                        <Text>Processing ...</Text>
+                    }
+                    {!this.state.spinner &&
+                        <Button block style={{ margin: 15, marginTop: 50 }} onPress={this._signInHandler}>
+                            <Text>Sign In</Text>
+                        </Button>
+                    }
                 </Content>
             </Container >
         );

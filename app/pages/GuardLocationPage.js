@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 
 import {
     Container
@@ -11,13 +11,34 @@ import Greeting from './GuardLocationPageComponents/Greeting';
 
 class GuardLocationPage extends Component {
 
+    constructor() {
+        super();
+        this.state = {
+            username: '',
+            usertoken: ''
+        };
+        this._bootstrap();
+    }
+
+    _bootstrap = async () => {
+        const username = await AsyncStorage.getItem('username');
+        const usertoken = await AsyncStorage.getItem('usertoken');
+        this.setState({
+            username: username,
+            usertoken: usertoken
+        });
+    }
+
     render() {
+
+        const { username, usertoken } = this.state
+
         return (
             <Container>
                 <Greeting />
                 <ImHereButton
-                    username={this.props.navigation.getParam('username', '')}
-                    password={this.props.navigation.getParam('password', '')}
+                    username={username}
+                    usertoken={usertoken}
                 />
             </Container>
         );
