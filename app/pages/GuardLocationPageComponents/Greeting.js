@@ -4,8 +4,8 @@ import { Text, View, StyleSheet } from 'react-native';
 class Heading extends Component {
   render() {
     return (
-      <View style={{ alignItems: 'flex-start' }}>
-        <Text>Good {this.props.shift}, {this.props.name}!</Text>
+      <View style={{ alignItems: 'center', marginTop: '25%', marginBottom: '5%'}}>
+        <Text style={{fontWeight: 'bold', fontSize: '30'}} >Good {this.props.shift} {this.props.name}!</Text>
       </View>
     );
   }
@@ -14,14 +14,25 @@ class Heading extends Component {
 class GuardDetails extends Component {
   render() {
     return (
-      <View style={{ alignItems: 'flex-start' }}>
-        <Text>Your corner: {this.props.location}</Text>
+      <View style={{ alignItems: 'center', marginBottom: '10%' }}>
+        <Text>Your corner is {this.props.location}</Text>
+      </View>
+    );
+  }
+}
+
+class CallCoordinator extends Component {
+  render() {
+    return (
+      <View style={{ alignItems: 'center', marginBottom: '1%' }}>
+        <Text>HEY!!!</Text>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  
   container: {
     backgroundColor: "#FFF"
   },
@@ -36,6 +47,7 @@ export default class Greeting extends Component {
       <View>
         <Heading name='John' shift='Morning' />
         <GuardDetails location='Young & Preston' />
+        
       </View>
     );
   }
